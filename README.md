@@ -1,6 +1,19 @@
 # AI Voice Detection
 
-A FastAPI service that classifies short voice samples as AI-generated or Human-generated. The project supports multi-language detection (Tamil, English, Hindi, Malayalam, Telugu) and uses audio features (mel spectrogram, MFCC, spectral features) with a RandomForest classifier.
+A FastAPI-based service that detects whether a given voice sample is **AI-generated or Human-generated** and identifies the **spoken language** among **English, Tamil, Hindi, Malayalam, and Telugu**.
+
+---
+
+## Overview
+
+- Accepts short audio files (`wav`, `mp3`, `m4a`)
+- Classifies AI-generated vs Human voice
+- Automatically detects spoken language
+- Returns structured JSON with confidence and explanation
+
+This project is designed as a **lightweight, extensible API** suitable for real-time or near–real-time voice analysis.
+
+---
 
 ## Repository Structure
 - `main.py` — FastAPI server and endpoints
@@ -10,6 +23,13 @@ A FastAPI service that classifies short voice samples as AI-generated or Human-g
 - `Dockerfile` — production Docker image
 - `voice_detector_model.pkl` — trained classifier (created after running `train.py`)
 - `TRAINING_GUIDE.md`, `DEPLOYMENT.md`, `RAILWAY_DEPLOY.md` — guides
+
+## Supported Languages
+1.English
+2.Tamil
+3.Hindi
+4.Malayalam
+5.Telugu
 
 ## Quick Start (Local)
 1. Create a Python environment (recommended):
@@ -88,13 +108,5 @@ Make sure `voice_detector_model.pkl` is present in the repo or that `train.py` i
 - `InconsistentVersionWarning` during unpickle — pin `scikit-learn` to the same version used to create the pickle. We pinned `scikit-learn==1.5.1`.
 - FFmpeg: `pydub` requires `ffmpeg` installed on the host. For local Windows, set `AudioSegment.converter` and `ffprobe` paths in `main.py` or install `ffmpeg` on the server.
 
-## Notes & Next Steps
-- For production stability consider exporting the classifier to ONNX or retraining in the environment matching your deployed runtime.
-- If memory or cold-starts are an issue, offload heavy tasks (Whisper transcription, Wav2Vec features) to a separate service or precompute features.
 
-## Contact
-If you want, I can:
-- Tail Railway logs and fix remaining issues
-- Convert the model to ONNX and update `model.py`
-- Add CI to run tests and auto-deploy
 
