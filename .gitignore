@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+.git/
+.env
+.env.local
+venv/
+.vscode/
+.pytest_cache/
+*.log
+.DS_Store
+audio.txt
